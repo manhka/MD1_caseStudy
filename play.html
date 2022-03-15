@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="data.js"></script>
+    <script src="Quiz.js"></script>
+</head>
+<style>
+    div#quiz {
+        width: 400px;
+        height: 300px;
+        margin: auto;
+    }
+
+    h3#question {
+        text-align: center;
+    }
+
+    div#answer {
+        text-align: center;
+        padding: 10px;
+        box-sizing: border-box;
+
+    }
+
+    button {
+        width: 50%;
+        margin: 5px;
+    }
+
+    #answer button {
+        background-color: cyan;
+        border-radius: 10px;
+        color: black;
+        width: 150px;
+        height: 65px;
+        font-size: x-large;
+    }
+
+    h3 {
+        font-size: xx-large;
+        color: white;
+    }
+
+    #answer button:hover {
+        background-color: gold;
+        color: white;
+
+    }
+
+    body {
+        background-color: chartreuse;
+    }
+
+    h2 {
+        color: deeppink;
+    }
+</style>
+<body>
+
+<button id="sound" onclick="sound()"
+        style="background-color: gold ;width: 40px ;border-radius: 10px;text-align: center;color: black">tiếng
+</button>
+<center><h2>AI LÀ TRIỆU PHÚ</h2><br>
+
+    <img src="http://lh3.googleusercontent.com/7VGeG66cn-R5Xb5UWniC5U_bZk7-qVLQT9Fye62kjaoOEd8Pg7JoJrXO5rlU7IWc1qY=w300"
+         alt=""><br>
+    <p style="font-size: xx-large;background-color: deeppink;border-radius: 30px" onclick="playAgain()" id="start"></p>
+    <div id="quiz">
+        <h4 style="color: white;font-size: x-large" id="time">time</h4>
+        <h3 id="question">PHẦN THƯỞNG</h3>
+        <button style="border-radius: 50px; text-align: center;background-color: darkkhaki; color: black ;width: 100px;"
+                onclick="prevQuiz()">CÂU HỎI TRƯỚC
+        </button>
+        <button style="height: 40px; border-radius: 50px;text-align: center;background-color: gold; color: black ;width: 100px; "
+                onclick="nextQuiz()" id="next">BẮT ĐẦU
+        </button>
+        <div id="answer">
+            <button onclick="chooseAnswer(this.innerHTML)" id="answer1">NHẤT:100 TRIỆU</button>
+            <button onclick="chooseAnswer(this.innerHTML)" id="answer2">NHÌ:50 TRIỆU</button>
+            <button onclick="chooseAnswer(this.innerHTML)" id="answer3">BA:20 TRIỆU</button>
+            <button onclick="chooseAnswer(this.innerHTML)" id="answer4">TƯ :5 TRIỆU</button>
+        </div>
+    </div>
+</center>
+
+
+<script>let audioBegin = new Audio('audio/begin.mp3')
+let x = 20;
+function time() {
+
+    if (x > 0) {
+        x--
+        document.getElementById('time').innerHTML = x;
+        if (x === 0) {
+            document.getElementById('time').innerHTML = 'HẾT GIỜ'
+            audioTimeAS.pause()
+            audioTimeUp.play()
+        }
+
+        setTimeout(time, 2000)
+    }
+}
+
+function sound() {
+    audioBegin.play()
+}
+
+
+let current = 1;
+let audioTimeUp = new Audio('audio/timeup.mp3')
+let audioTimeAS = new Audio('audio/timeAnswer.mp3')
+let quizs = loadQuiz();
+let check = true;
+
+function showQuiz() {
+    audioBegin.pause()
+    audioTimeAS.play()
+    time()
+    let quiz = quizs[current - 1];
+    document.getElementById('question').innerHTML = quiz.question;
+    for (let i = 1; i <= 4; i++) {
+        document.getElementById('answer' + i).innerHTML = quiz.answers[i - 1];
+    }
+}
+
+let count = 0;
+
+function nextQuiz() {
+    document.getElementById('next').innerHTML = 'CÂU TIẾP'
+    count++;
+    if (count <= 5) {
+        document.getElementById('start').innerHTML = 'CÂU' + count
+    } else {
+        document.getElementById('start').innerHTML = 'HẾT CÂU HỎI'
+    }
+
+    // if (count===5){
+    //     check=true
+    // }
+
+    time()
+    current++;
+    showQuiz();
+}
+
+let audioLose = new Audio('audio/lose.mp3')
+let audioWin = new Audio('audio/win.mp3')
+let check1=true;
+function chooseAnswer(answer) {
+    audioTimeAS.pause();
+    time()
+    audioBegin.pause()
+    let quiz = quizs[current - 1];
+    if (answer === quiz.correct) {
+        if (check1){audioTimeAS.pause()
+            audioWin.play();
+         check1=false;}
+        nextQuiz();
+    } else {
+        audioTimeAS.pause();
+        audioLose.play();
+        current = 1;
+    }
+}
+
+function prevQuiz() {
+    current--
+    count--;
+    document.getElementById('start').innerHTML = 'CÂU' + count
+    showQuiz();
+}
+
+function playAgain() {
+    showQuiz();
+
+}
+
+</script>
+</body>
+</html>

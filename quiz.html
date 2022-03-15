@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="Quiz.js"></script>
+    <script src="data.js"></script>
+</head>
+<body>
+<!-- tạo dao diện nhập dữ liệu-->
+<form id="add-quiz">
+    <input placeholder="question" type="text" id="question">
+    <input placeholder="answer1" type="text" id="answer1">
+    <input placeholder="answer2" type="text" id="answer2">
+    <input placeholder="answer3" type="text" id="answer3">
+    <input placeholder="answer4" type="text" id="answer4">
+    <input placeholder="correct" type="text" id="correct">
+</form>
+
+<button onclick="add()">add quiz</button>
+<button onclick="reset()">reset</button>
+<hr>
+<table border="1">
+    <thead>
+    <tr>
+        <th>stt</th>
+        <th>question</th>
+        <th>correct</th>
+    </tr>
+    </thead>
+    <tbody id="list_quiz">
+
+    </tbody>
+</table>
+<script>
+    showListQuiz();
+    //  tạo hàm add để điền thêm dữ liệu vào local storage
+    function add() {
+        // tạo đối tượng quiz dựa vào khung class Quiz tạo ở bên Quiz.js
+        let quiz = new Quiz();
+        // trỏ đến thuộc tính question rồi chuyền dữ liệu cho thuộc tính thông qua getElementById.
+        quiz.question = document.getElementById('question').value;
+        //trỏ đến thuộc tính answers(LÀ MẢNG) rồi chuyền dữ liệu cho thuộc tính thông qua getElementById.
+        quiz.answers.push(document.getElementById('answer1').value);
+        quiz.answers.push(document.getElementById('answer2').value);
+        quiz.answers.push(document.getElementById('answer3').value);
+        quiz.answers.push(document.getElementById('answer4').value);
+        // trỏ đến thuộc tính corect rồi chuyền dữ liệu cho thuộc tính thông qua getElementById.
+        quiz.correct = document.getElementById('correct').value;
+        //thêm dữ liệu vào local storage
+        addQuiz(quiz);
+        showListQuiz()
+        document.getElementById('add-quiz').reset();
+    }
+
+    //tạo nút xóa dữu liệu ở các ô
+    function reset() {
+        document.getElementById('add-quiz').reset();
+    }
+
+    function showListQuiz() {
+        let quizs = loadQuiz();
+        let str = ''
+        for (let i = 0; i < quizs.length; i++) {
+            str += `<tr>
+                    <td>${i + 1}</td>
+                    <td>${quizs[i].question}</td>
+                    <td>${quizs[i].correct}</td>
+                  </tr>`
+
+        }
+        document.getElementById('list_quiz').innerHTML = str
+    }
+
+</script>
+</body>
+</html>

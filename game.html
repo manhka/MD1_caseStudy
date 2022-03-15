@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>game</title>
+    <script src="game.js"></script>
+
+</head>
+<body>
+
+<center style="background-color: cyan ;width: 100% ; height:1000px" >
+    <h1>AI LÀ TRIỆU PHÚ</h1>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-megaphone-fill" viewBox="0 0 16 16">
+        <path d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0v-11zm-1 .724c-2.067.95-4.539 1.481-7 1.656v6.237a25.222 25.222 0 0 1 1.088.085c2.053.204 4.038.668 5.912 1.56V3.224zm-8 7.841V4.934c-.68.027-1.399.043-2.008.053A2.02 2.02 0 0 0 0 7v2c0 1.106.896 1.996 1.994 2.009a68.14 68.14 0 0 1 .496.008 64 64 0 0 1 1.51.048zm1.39 1.081c.285.021.569.047.85.078l.253 1.69a1 1 0 0 1-.983 1.187h-.548a1 1 0 0 1-.916-.599l-1.314-2.48a65.81 65.81 0 0 1 1.692.064c.327.017.65.037.966.06z"/>
+    </svg>
+    <button  style="color:deeppink ;border-radius: 50px ;-webkit-text-fill-color: white;background: gold" id="sound" onclick="soundBegin()">tiếng</button>
+
+    <img style="width: 550px ;border-radius: 100px" src="https://tse1.mm.bing.net/th?id=OIP.k3K0vxbflbc7BjqgLyGJ2gHaCz&pid=Api&P=0&w=423&h=160" alt=""><br>
+    <b id="status" style="background-color: chartreuse;font-size: xx-large;color:white "></b>
+    <br>
+    <button  style=" font-size: xx-large;border-radius: 10px ;height: 50px;width: 250px; -webkit-text-fill-color: aliceblue; background-color:blue " onclick="play()" id="play">BẮT ĐẦU</button>
+    <div  id="point" style=" font-size: x-large;color: darkslateblue" ></div>
+    <p id="question" style="color: white;background-color: deeppink ;font-size: x-large;width: 400px;border-radius: 20px"></p><br>
+    <button style="margin: 5px;font-size: x-large;border-radius: 50px ;height: 60px;width: 250px; -webkit-text-fill-color: aliceblue; background-color:blue " id="answer1" onclick="answer(this.id)">SỐ LIỆU THỐNG KÊ</button>
+    <br>
+    <button style="margin: 5px;font-size: x-large;border-radius: 50px ;height: 60px;width: 250px; -webkit-text-fill-color: aliceblue; background-color:blue " id="answer2" onclick="answer(this.id)">BANGR XẾP HẠNG</button>
+    <br>
+    <button style="margin: 5px;font-size: x-large;border-radius: 50px ;height: 60px;width: 250px; -webkit-text-fill-color: aliceblue; background-color:blue " id="answer3" onclick="answer(this.id)">CÀI ĐẶT</button>
+    <br>
+    <button style="margin: 5px;font-size: x-large;border-radius: 50px ;height: 60px;width: 250px; -webkit-text-fill-color: aliceblue; background-color:blue " id="answer4" onclick="answer(this.id)">THOÁT TRÒ CHƠI</button>
+</center>
+</body>
+
+</html>
+<script>
+
+    let millionaire1 = new Millionaire('CÂU1:lớp c200i1 có bao nhiêu người', 'A:17', 'B:18', 'C:20', 'D:21', 'answer4','poin')
+    let millionaire2 = new Millionaire('<img src="https://tse1.mm.bing.net/th?id=OIP.MbS84fd6cuy22IHBdp5HWwHaFA&pid=Api&rs=1&c=1&qlt=95&w=179&h=121"/> <br> CÂU2:  đây là ai?'
+        ,'A:VLADIMIR PUTIN','B:JOHN BIDEN','C:CHÚA TỂ','D:NGƯỜI KHỔNG LỒ','answer1')
+    let millionaire3 = new Millionaire('CÂU3:VCS LÀ VIẾT TẮT CỦA TỪ GÌ?', 'A:VERSION CONTROL SEYTEM', 'B:VERSION CANCEL SYSTEM',
+        'C:VERSION CANDIDATE SYSTEM', 'D:KHÔNG CÓ ĐÁP ÁN ĐÚNG', 'answer1')
+    let millionaire4 = new Millionaire('CÂU4:AI LÀ NGƯỜI QUYỀN LỰC NHẤT THẾ GIỚI?', 'A:BẠN', 'B:BỐ BẠN', 'C:MẸ BẠN', 'D:NGƯỜI YÊU BẠN', 'answer1')
+    let millionaire5 = new Millionaire('CÂU5:VIỆT NAM CÓ BAO NHIÊU DÂN TỘC ANH EM?', 'A:52', 'B:53', 'C:54', 'D:55', 'answer3')
+    let millionaire6 = new Millionaire('CÂU6:AI LÀ NGƯỜI SÁNG CHẾ RA BÓNG ĐIỆN ĐẦU TIÊN', 'A:Bác Hồ', 'B:Thomas Alva Edison', 'C:bác học Anhxtanh', 'D:Albert Einstein', 'answer2')
+    let millionaire7 = new Millionaire('CÂU7:ĐÂU LÀ CÂU MỘT TRONG NHỮNG CÂU NÓI NỔI TIẾNG CỦA thầy Huấn?', 'A:Cuộc sống phải buơn chải',
+        'B:Không làm mà đòi có ăn thì ăn cức!!',
+        'C:Chia sẻ cho thầy đi !!', 'D:Cả A và B', 'answer4')
+    let millionaire8 = new Millionaire('CÂU8:Điền vào chỗ trống:"đục nước béo..."', 'A:cá', 'B:người', 'C:bò', 'D:cò', 'answer4')
+    let millionaire9 = new Millionaire('CÂU9:Ronaldo có mấy quả bóng vàng tính đến năm 2022?', 'A:3', 'B:4', 'C:5', 'D:6', 'answer3')
+    let millionaire10 = new Millionaire('<img src="https://tse4.mm.bing.net/th?id=OIP.328AbNiaKa_qc_90ZoTS0gHaFj&pid=Api&P=0&w=210&h=158" /><br>CÂU10: ĐÂY LÀ CẦU THỦ NÀO?'
+        , 'A:Ronaldo', 'B:Ronalnhinho', 'C:Leonel Messi', 'D:David Dilva', 'answer2')
+    console.log('millionaire1.checkAnswer=', millionaire1.checkAnswer)
+    let count = 0;
+    let nextQuestion = count + 1;
+    let audio1 = new Audio('audio/begin.mp3');
+
+function soundBegin() {
+    check = !check;
+    if (check) {
+        audio1.play();
+    } else {
+        audio1.pause()
+    }
+}
+let audio2=new Audio('audio/play.mp3')
+
+    function play() {
+    audio1.pause()
+    count++;
+
+        audio2.play()
+        console.log('count==', count)
+        if (count === 1) {
+            document.getElementById('question').innerHTML = millionaire1.question;
+            document.getElementById('answer1').innerHTML = millionaire1.answer1;
+            document.getElementById('answer2').innerHTML = millionaire1.answer2;
+            document.getElementById('answer3').innerHTML = millionaire1.answer3;
+            document.getElementById('answer4').innerHTML = millionaire1.answer4;
+        }
+        if (count === 2) {
+            document.getElementById('question').innerHTML = millionaire2.question;
+            document.getElementById('answer1').innerHTML = millionaire2.answer1;
+            document.getElementById('answer2').innerHTML = millionaire2.answer2;
+            document.getElementById('answer3').innerHTML = millionaire2.answer3;
+            document.getElementById('answer4').innerHTML = millionaire2.answer4;
+        }
+        if (count === 3) {
+            document.getElementById('question').innerHTML = millionaire3.question;
+            document.getElementById('answer1').innerHTML = millionaire3.answer1;
+            document.getElementById('answer2').innerHTML = millionaire3.answer2;
+            document.getElementById('answer3').innerHTML = millionaire3.answer3;
+            document.getElementById('answer4').innerHTML = millionaire3.answer4;
+        }
+        if (count === 4) {
+            document.getElementById('question').innerHTML = millionaire4.question;
+            document.getElementById('answer1').innerHTML = millionaire4.answer1;
+            document.getElementById('answer2').innerHTML = millionaire4.answer2;
+            document.getElementById('answer3').innerHTML = millionaire4.answer3;
+            document.getElementById('answer4').innerHTML = millionaire4.answer4;
+        }
+        if (count === 5) {
+            document.getElementById('question').innerHTML = millionaire5.question;
+            document.getElementById('answer1').innerHTML = millionaire5.answer1;
+            document.getElementById('answer2').innerHTML = millionaire5.answer2;
+            document.getElementById('answer3').innerHTML = millionaire5.answer3;
+            document.getElementById('answer4').innerHTML = millionaire5.answer4;
+        }
+        if (count === 6) {
+            document.getElementById('question').innerHTML = millionaire6.question;
+            document.getElementById('answer1').innerHTML = millionaire6.answer1;
+            document.getElementById('answer2').innerHTML = millionaire6.answer2;
+            document.getElementById('answer3').innerHTML = millionaire6.answer3;
+            document.getElementById('answer4').innerHTML = millionaire6.answer4;
+        }
+        if (count === 7) {
+            document.getElementById('question').innerHTML = millionaire7.question;
+            document.getElementById('answer1').innerHTML = millionaire7.answer1;
+            document.getElementById('answer2').innerHTML = millionaire7.answer2;
+            document.getElementById('answer3').innerHTML = millionaire7.answer3;
+            document.getElementById('answer4').innerHTML = millionaire7.answer4;
+        }
+        if (count === 8) {
+            document.getElementById('question').innerHTML = millionaire8.question;
+            document.getElementById('answer1').innerHTML = millionaire8.answer1;
+            document.getElementById('answer2').innerHTML = millionaire8.answer2;
+            document.getElementById('answer3').innerHTML = millionaire8.answer3;
+            document.getElementById('answer4').innerHTML = millionaire8.answer4;
+        }
+        if (count === 9) {
+            document.getElementById('question').innerHTML = millionaire9.question;
+            document.getElementById('answer1').innerHTML = millionaire9.answer1;
+            document.getElementById('answer2').innerHTML = millionaire9.answer2;
+            document.getElementById('answer3').innerHTML = millionaire9.answer3;
+            document.getElementById('answer4').innerHTML = millionaire9.answer4;
+        }
+        if (count === 10) {
+            document.getElementById('question').innerHTML = millionaire10.question;
+            document.getElementById('answer1').innerHTML = millionaire10.answer1;
+            document.getElementById('answer2').innerHTML = millionaire10.answer2;
+            document.getElementById('answer3').innerHTML = millionaire10.answer3;
+            document.getElementById('answer4').innerHTML = millionaire10.answer4;
+        }
+    }
+    let audioml= new Audio('audio/milionaire.mp3')
+    let audioWin= new Audio('audio/win.mp3')
+let point=0;
+let audioLose=new Audio('audio/lose.mp3')
+    function answer(id) {
+        //question1
+        if (count === 1) {
+            console.log('id==', id)
+            if (id === millionaire1.checkAnswer) {
+                document.getElementById('status').innerHTML = '<br> CHÚC MỪNG BẠN ĐÃ TRẢ LỜI ĐÚNG';
+                audio2.pause()
+                audioWin.play()
+                point=point+100000;
+                console.log('point==',point)
+                if (check){document.getElementById('play').innerHTML = 'TIẾP TỤC'}
+
+                document.getElementById('point').innerHTML='TIỀN:'+point+'VNĐ'
+            } else {
+                document.getElementById('status').innerHTML = '<br>BẠN ĐÃ CHỌN SAI , THỬ LẠI NÀO'
+                audio2.pause()
+                audioLose.play()
+                document.getElementById('point').innerHTML='TIỀN:'
+                document.getElementById('play').innerHTML = 'CHƠI LẠI'
+                count = 0;
+            }
+        }
+
+//question2
+        if (count === 2) {
+            console.log('point in if2==',point)
+            console.log('count-if2==',count)
+            console.log('id==', id)
+            if (id === millionaire2.checkAnswer) {
+                document.getElementById('status').innerHTML = '<br>TUYỆT VỜI';
+                audio2.pause()
+                audioWin.play()
+                point=point+200000;
+                document.getElementById('play').innerHTML = 'TIẾP TỤC'
+
+                document.getElementById('point').innerHTML='TIỀN:'+point+'VNĐ'
+            } else {
+                document.getElementById('status').innerHTML = '<br>BẠN ĐÃ CHỌN SAI , THỬ LẠI NÀO'
+                audio2.pause()
+                audioLose.play()
+                document.getElementById('point').innerHTML='TIỀN:'+500000+'VNĐ'
+                document.getElementById('play').innerHTML = 'CHƠI LẠI'
+                count = 0;
+            }
+        }
+
+        //question3
+
+            if (count === 3) {
+                console.log('id==', id)
+                if (id === millionaire3.checkAnswer) {
+                    document.getElementById('status').innerHTML = '<br>WOW! BẠN THẬT GIỎI';
+                    audio2.pause()
+                    audioWin.play()
+                    point += 500000;
+                    document.getElementById('play').innerHTML = 'TIẾP TỤC'
+                    document.getElementById('point').innerHTML = 'TIỀN:' + point + 'VNĐ'
+                } else {
+                    document.getElementById('status').innerHTML = '<br>THỬ CHƠI NÀO'
+                    audio2.pause()
+                    audioLose.play()
+                    document.getElementById('point').innerHTML = 'TIỀN:' + 500000 + 'VNĐ'
+                    document.getElementById('play').innerHTML = 'CHƠI LẠI'
+                    count = 0;
+                }
+            }
+
+        //question4
+        if (count === 4) {
+            console.log('id==', id)
+            if (id === millionaire4.checkAnswer) {
+                document.getElementById('status').innerHTML = '<br>SĂP TRỞ THÀNH TRIỆU PHÚ RỒI/KAKA;'
+                audio2.pause()
+                audioWin.play()
+                point+=1000000
+                document.getElementById('play').innerHTML = 'TIẾP TỤC'
+                document.getElementById('point').innerHTML='TIỀN:'+point+'VNĐ'
+            } else {
+                document.getElementById('status').innerHTML = '<br>THẾ MÀ KHÔNG BIẾT,THỬ LẠI NÀO'
+                audio2.pause()
+                audioLose.play()
+                document.getElementById('point').innerHTML='TIỀN:'+500000+'VNĐ'
+                document.getElementById('play').innerHTML = 'CHƠI LẠI'
+                count = 0;
+            }
+        }
+//question5
+        if (count === 5) {
+            console.log('id==', id)
+            if (id === millionaire5.checkAnswer) {
+                document.getElementById('status').innerHTML = '<br>Á ĐÙ ! ĐƯỢC CỦA LÓ--';
+                audio2.pause()
+                audioWin.play()
+                point+=2000000;
+                document.getElementById('play').innerHTML = 'TIẾP TỤC'
+            } else {document.getElementById('point').innerHTML='TIỀN:'+point+'VNĐ'
+                document.getElementById('status').innerHTML = '<br>Ơ LẠI SAI, THỬ LẠI NÀO'
+                audio2.pause()
+                audioLose.play()
+                document.getElementById('point').innerHTML='TIỀN:'+1000000+'VNĐ'
+                document.getElementById('play').innerHTML = 'CHƠI LẠI'
+                count = 0;
+            }
+        }
+//question6
+        if (count === 6) {
+            console.log('id==', id)
+            if (id === millionaire6.checkAnswer) {
+                document.getElementById('status').innerHTML = '<br>ĐÚNG LÀ CON TRAI CỦA TA';
+                audio2.pause()
+                audioWin.play()
+                point+=3000000;
+                document.getElementById('play').innerHTML = 'TIẾP TỤC'
+                document.getElementById('point').innerHTML='TIỀN:'+point+'VNĐ'
+            } else {
+                document.getElementById('status').innerHTML = '<br>TÍCH CỰC CHƠI LẠI,'
+                audio2.pause()
+                audioLose.play()
+                document.getElementById('point').innerHTML='TIỀN:'+1000000+'VNĐ'
+                document.getElementById('play').innerHTML = 'CHƠI LẠI'
+                count =0 ;
+            }
+        }
+//question7
+        if (count === 7) {
+            console.log('id==', id)
+            if (id === millionaire7.checkAnswer) {
+                document.getElementById('status').innerHTML = '<br>KHOÁI KHOÁI!! GO AHEAD';
+                audio2.pause()
+                audioWin.play()
+                point+=4000000;
+                document.getElementById('play').innerHTML = 'TIẾP TỤC'
+                document.getElementById('point').innerHTML='TIỀN:'+point+'VNĐ'
+            } else {
+                document.getElementById('status').innerHTML = '<br>GÀ QUÁ []'
+                audio2.pause()
+                audioLose.play()
+                document.getElementById('point').innerHTML='TIỀN:'+2000000+'VNĐ'
+                document.getElementById('play').innerHTML = 'CHƠI LẠI'
+                count = 0;
+            }
+        }
+//question8
+        if (count === 8) {
+            console.log('id==', id)
+            if (id === millionaire8.checkAnswer) {
+                document.getElementById('status').innerHTML = '<br>BẠN SỨNG ĐÁNG CÓ 10 NGƯỜI YÊU!';
+                audio2.pause()
+                audioWin.play()
+                point+=5000000;
+                document.getElementById('play').innerHTML = 'TIẾP TỤC'
+                document.getElementById('point').innerHTML='TIỀN:'+point+'VNĐ'
+            } else {
+                document.getElementById('status').innerHTML = '<br>Ế LÀ PHẢI!, THỬ LẠI NÀO'
+                audio2.pause()
+                audioLose.play()
+                document.getElementById('point').innerHTML='TIỀN:'+2000000+'VNĐ'
+                document.getElementById('play').innerHTML = 'CHƠI LẠI'
+                count = 0;
+            }
+        }
+//question9
+        if (count === 9) {
+            console.log('id==', id)
+            if (id === millionaire9.checkAnswer) {
+                document.getElementById('status').innerHTML = '<br>ĐÚNG CON NHÀ NGƯỜI TA!!';
+                audio2.pause()
+                audioWin.play()
+                point+=6000000;
+                document.getElementById('play').innerHTML = 'TIẾP TỤC'
+                document.getElementById('point').innerHTML='TIỀN:'+point+'VNĐ'
+            } else {
+                document.getElementById('status').innerHTML = '<br>THẾ THÌ CHẾT TIỀN , THỬ LẠI NÀO'
+                audio2.pause()
+                audioLose.play()
+                document.getElementById('point').innerHTML='TIỀN:'+3000000+'VNĐ'
+                document.getElementById('play').innerHTML = 'CHƠI LẠI'
+                count = 0;
+            }
+        }
+//question10
+        if (count === 10) {
+            console.log('id==', id)
+            if (id === millionaire10.checkAnswer) {
+                document.getElementById('status').innerHTML = '<br>BẠN ĐÃ TRỞ THÀNH TRIỆU PHÚ';
+                audio2.pause()
+                audioml.play()
+                point+=1000000;
+                document.getElementById('play').innerHTML = 'TIẾP TỤC'
+                document.getElementById('point').innerHTML='TIỀN:'+point+'VNĐ'
+            } else {
+                document.getElementById('status').innerHTML = '<br>THẤY CON NHÀ NGƯỜI TA KHÔNG!* , THỬ LẠI NÀO'
+                audio2.pause()
+                audioLose.play()
+                document.getElementById('point').innerHTML='TIỀN:'+3000000+'VNĐ'
+                document.getElementById('play').innerHTML = 'CHƠI LẠI'
+                count = 0;
+            }
+        }}
+
+
+
+</script>
