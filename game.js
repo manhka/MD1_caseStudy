@@ -51,14 +51,14 @@ this.checkAnswer=checkAnswer
         return this.point;
     }
 }
-class time {
-    constructor(second) {
-        this.second=second;
-    }
-    setSecond(second){
-        this.second=second;
-    }
-    getSecond(){
-        return this.second
-    }
-}
+// class time {
+//     constructor(second) {
+//         this.second=second;
+//     }
+//     setSecond(second){
+//         this.second=second;
+//     }
+//     getSecond(){
+//         return this.second
+//     }
+// }
